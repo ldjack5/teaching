@@ -2,7 +2,7 @@
 title: "API-Shiny Pipeline"
 author: "Leah Jackman"
 date: "4/13/2020"
-output: beamer_presentation
+output: pdf_document
 ---
 
 # Learning Objectives
@@ -27,73 +27,75 @@ At the end of this lesson, you should be able to...
 
 # The Real World
 Part of what a Data Scientist does is...
+
 Find data, assess data, analyze data, visualize data
 
 # The Real World: Find Data
-Boss: Find the latitude and longitude of all the Walgreens and Boots locations world-wide. When can you get this done?
+**Boss:** Find the latitude and longitude of all the Walgreens and Boots locations world-wide. When can you get this done?
 
-Me: (Never worked with APIs, maps, geospatial analysis) ...
+**Me:** (Never worked with APIs, maps, geospatial analysis) ...
 
-Boss: When can you get this done?
+**Boss:** When can you get this done?
 
-Me: A week?
+**Me:** A week?
 
 # The Real World: Assess Data
-Me: There's an indicator column in this database, but all the values are 0. (Knows there must be at least one 1.) Any idea why?
+**Me:** There's an indicator column in this database, but all the values are 0. (Knows there must be at least one 1.) Any idea why?
 
-Database Owner/IT Chatbot: Negative. See. Owner. Of. Table.
+**Database Owner/IT Chatbot:** Negative. See. Owner. Of. Table.
 
-Owner of Table/Overworked Project Manager: ¯\\_(")_/¯ 
+**Owner of Table/Overworked Project Manager:** (shrug)
 
-Me: (Guess I can't trust the data in that column. I wonder about the rest of the table...)
+**Me:** (Guess I can't trust the data in that column. I wonder about the rest of the table...)
 
 # The Real World: Analyze Data
-Old School Industry Statistician: Here is a file with tens of thousands of free text comments from doctors. Use NLP to find all the negative comments.
+**Old School Industry Statistician:** Here is a file with thousands of comments from doctors. Use NLP to find all the negative ones.
 
-Me: (Proud, confident, having just read Tidy Text Mining) I can do a sentiment analysis on the comments, shouldn't take me too long!
+**Me:** (Confident, having just read Tidy Text Mining) I can do a sentiment analysis on the comments, shouldn't take me too long!
 
-Me: (Proud, returns with data) Here!
+**Me:** (Proud, returns with data) Here!
 
-OSIS: Now use NLP to tell me why the doctors are upset.
+**OSIS:** Now use NLP to tell me why the doctors are upset.
 
-Me: (Unsure) Well I can do some clustering to see which comments are related and analyze to see if clusters correspond to comment themes...
+**Me:** (Unsure) Well I can do some clustering to see which comments are related and analyze to see if the clusters are meaningful...
 
-OSIS: No, I want quotes from the actual comments that state the exact reason the doctors are upset.
+**OSIS:** No, I want quotes from the actual comments that state the exact reason the doctors are upset.
 
-Me: (Looking at data - no labels, just free text)... I don't think NLP can do that ...
+**Me:** (Looking at data - no labels, just free text)... I don't think NLP can do that ...
 
-OSIS: (Frown)
+**OSIS:** (Frown)
 
 # The Real World: Visualize Data
-Me: (Demos fancy new data visualization)
+**Me:** (Demos fancy new data visualization)
 
-Boss: This isn't sexy enough. I saw an application that has a spinny-globe loading screen, can you add that?
+**Boss:** This isn't sexy enough. I saw an application that has a spinny-globe loading screen, can you add that?
 
-Me: Well... Maybe... I can try ...But what does that have to do with this visualization?
+**Me:** Well... Maybe... I can try ...But what does that have to do with this visualization?
 
-Boss: SPINNY GLOBE! SEXY! BRING ME!
+**Boss:** SPINNY GLOBE! SEXY! BRING ME!
 
 # APIs
 
 * API stands for Application Programming Interface. 
-* Serves as a mediator. 
-* Takes as input a request in a very strict syntax.
+* Serves as a mediator/gatekeeper. 
+* Takes as input a request in a very strict format.
 * Request is parsed, and initiates some set of processes. 
 * Processes return data objects in a structured format - JSON, XML, etc. 
 
 # Requests
 [httr package](https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html)
+
 [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html)
 
 # GET
 
-Me: (Goes to API's front door. Piles of data with my name on it sitting there.) Thanks API!  
+**Me:** (Goes to API's front door. Piles of data with my name on it sitting there.) Thanks API!  
 
-API: You're welcome, use the data wisely or you will be sued. Have a lovely day!
+**API:** You're welcome, use the data wisely or you will be sued. Have a lovely day!
 
-Example:
+# GET Example
 
-```{r }
+```{r, eval = FALSE}
 #This request returns the state data aggregated over all time.
 
 #Libraries
@@ -133,22 +135,24 @@ Hint: [Read the documentation](https://documenter.getpostman.com/view/8854915/Sz
 
 # POST
 
-Me: (Goes to API's front door, door closed) Knock, knock. Here's my req-
+**Me:** (Goes to API's front door, door closed) Knock, knock. Here's my req-
 
-API: (Interrupting) Intruder! Intruder!
+**API:** (Interrupting) Intruder! Intruder!
 
-Me: Oh, right right. (Puts eyeball up to optical scanner, completes secret knock knock pattern)
+**Me:** Oh, right right. (Puts eyeball up to optical scanner, completes secret knock knock pattern)
 
-API: Phew! OK, now what do you want?
+**API:** Phew! OK, now what do you want?
 
-Me: (Sends list of exacting instructions.)
+**Me:** (Sends list of exacting instructions.)
 
-API: (Scrutinizing) Looks to be in order. Here's your data. Use it wisely or you will be sued. Have a lovely day!
+**API:** (Scrutinizing) Looks to be in order. Here's your data. Use it wisely or you will be sued. Have a lovely day!
 
 
 Including an example here, but we're not going to go over it.
 
-```{r}
+# POST Example
+
+```{r, eval = FALSE}
 #' Search Citeline for Protocol Information
 #' 
 #' Searches Citeline Trial endpoint based on user input 
@@ -275,8 +279,9 @@ search_similar_trials_fn_gbl <- function(return_fields_lst,
 [Shiny](https://shiny.rstudio.com/) is a package in R that constructs websites. 
 
 Two ways to construct a website in Shiny
+
 * ui.R, server.R
-# ui function, server function together in one .R file.
+* ui function, server function together in one .R file.
 
 
 # UI
@@ -286,10 +291,11 @@ Two ways to construct a website in Shiny
 
 Demo "inspect" on website to show example.
 
+# UI Example
 [Simple Example from RStudio](https://shiny.rstudio.com/gallery/kmeans-example.html)
 Uses the two separate .R files approach
 
-```{r}
+```{r, eval = FALSE}
 
 vars <- setdiff(names(iris), "Species")
 
@@ -320,16 +326,18 @@ What other types of inputs exist beside select and numeric?
 * Input variables from the ui can be accessed using "input$_input id_"
 * Input variables from the ui cannot be accessed, but can be defined using "output$_output id_"
 
+# Server Example
 [Simple Example from RStudio](https://shiny.rstudio.com/gallery/kmeans-example.html)
 Uses the two separate .R files approach
 
-```{r}
+```{r, eval = FALSE}
 
 function(input, output, session) {
 
   # Combine the selected variables into a new data frame
-  # selectedData is available to every function in the server, and will automatically change if xcol or ycol changes
-  # note the ({}) syntax - this is use for all reactivity - renderers, observers, reactive variables, etc.
+  # selectedData is available to every function in the server,
+  #and will automatically change if xcol or ycol changes
+  # note the ({}) syntax - this is use for all reactivity
   selectedData <- reactive({
     #inputs accessed here
     iris[, c(input$xcol, input$ycol)]
@@ -356,7 +364,23 @@ function(input, output, session) {
 
 ```
 
+**You Try!**
+Many packages other than ggplot2 exist to create visualizations in R. Find one such package How would you amend the above code to use the new package? 
+
 # COVID-19 Example
+
+[GitHub Project](https://github.com/ldjack5/teaching)
+
+Download and play around.
+Some things to try:
+
+* Make the graph prettier.
+* Add a select input for model types - Exponential, Logistic, etc. - that would be appropriate for this data. When the user selects a model, overlay the model on the graph.
+* Check out shinyDashboard and shinyDashboardPlus and try to add a theme to make the website more appealing.
+* Add a checkbox with "confirmed" and "deaths". Use the checkbox to allow the user to see either confirmed, or deaths or both on the graph.
+* Change the country select input to a selectizeInput where you can accept multiple values. Plot the curves for all countries on a single graph.
+* Add in states/provinces for countries other than the US.
+
 
 # Reflection
 
